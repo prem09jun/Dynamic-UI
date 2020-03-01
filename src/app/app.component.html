@@ -1,0 +1,172 @@
+<form [formGroup]="dynamicForm">
+  <div class="card">
+    <div class="card-header"><b>Hyperledger Fabric Network Configuration</b></div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <div class="card">
+              <div class="card-header"><b>Host Details</b></div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <label for="host"><b>Host Name:</b></label>
+                    <input type="text" class="form-control" id="host" formControlName="hostname"/>
+                  </div>
+                </div>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <div class="card">
+              <div class="card-header"><b>Orderer Details</b></div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <label for="odrname"><b>Name :</b></label>
+                    <input type="text" class="form-control" id="odrname" formControlName="orderername"/>
+                  </div>
+                </div>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <div class="card">
+              <div class="card-header"><b>Channel Details</b></div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <label for="channelname"><b>Name :</b></label>
+                    <input type="text" class="form-control" id="channelname" formControlName="channelname"/>
+                  </div>
+                </div>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col">
+
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-success mx-auto d-block" (click)="addNewOrganizations()">Add New
+            Org</button>
+        </div>
+        <div class="col">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div formArrayName="organizations">
+    <div *ngFor="let org of dynamicForm.get('organizations')['controls']; let i=index">
+      <div [formGroupName]="i">
+        <div class="card">
+          <div class="card-header"><b>Organization {{i+1}}</b></div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-8">
+                <div class="card">
+                  <div class="card-header"><b>Organization Details</b></div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <label for="caname"><b>Org Name :</b></label>
+                        <input type="text" class="form-control" id="orgname" formControlName="orgname"/>
+                      </div>
+                      <div class="col">
+                        <label for="caname"><b>Org MSP :</b></label>
+                        <input type="text" class="form-control" id="orgmsp" formControlName="orgmsp"/>
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="card">
+                  <div class="card-header"><b>Certificate Authority Details</b></div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <label for="caname"><b>CA Name :</b></label>
+                        <input type="text" class="form-control" id="caname" formControlName="caname"/>
+                      </div>
+                    </div>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col">
+
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-success mx-auto d-block"
+                  (click)="addNewPeers(org.controls.peers)">Add New Peer</button>
+              </div>
+              <div class="col">
+
+              </div>
+            </div>
+            <br>
+            <div formArrayName="peers">
+              <div *ngFor="let peer of org.get('peers')['controls']; let j=index">
+                <div [formGroupName]="j">
+                  <br>
+                  <div class="card">
+                    <div class="card-header"><b>Peer {{j+1}}</b></div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col">
+                          <label for="peername"><b>Peer Name :</b></label>
+                          <input type="text" class="form-control" id="peername" formControlName="peername"/>
+                        </div>
+                        <div class="col">
+                          <label for="peercount"><b>Peer Count :</b></label>
+                          <input type="text" class="form-control" id="peercount" formControlName="peercount"/>
+                        </div>
+                        <div class="col">
+                          <label for="usercount"><b>User Count :</b></label>
+                          <input type="text" class="form-control" id="usercount" formControlName="usercount"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-danger mx-auto d-block" (click)="createNetwork()">Create Network</button>
+      </div>
+      <div class="col">
+
+      </div>
+    </div>
+  </div>
+  <br>
+</form>
